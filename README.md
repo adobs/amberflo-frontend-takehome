@@ -1,58 +1,49 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
-## Available Scripts
+### Amberflo Frontend Take Home Challenge
 
-In the project directory, you can run:
+## Table of Contents
+1. [Running app locally on dev server](#running)
+1. [Interfaces](#interfaces)
+1. [Considerations and assumptions](#considerations)
+1. [Future development ideas](#future)
 
-### `npm start`
+## 1. <a name="running"></a>Running app locally on dev server
+Assumes end user will have `git` and `npm`.
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone this repo.
+1. At directory root, add file called `.env`.  Add the following environment variable to the file: 
+`REACT_APP_API_KEY=<API key>`.
+1. In terminal at repo root, run `npm i` to install all dependencies.
+1. Run `npm start` to run app in dev mode.
+1. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+## 2. <a name="interfaces"></a>Interfaces
 
-### `npm test`
+<b>Landing Page</b>
+- View current meters
+- Sortable tabular data
+- Add new meters
+- Delete meters (that were created by the user)
+![Landing Page](/docs/images/Landing%20Page.png)
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+Double click on a meter to get the <b>Meter Details</b> page 
+- Edit any fields of meter
+- Delete meter
+![Meter Details](/docs/images/Meter%20Details%20page.png)
 
-### `npm run build`
+After clicking delete meter button (through Landing Page or Meter Details page), see the <b>Delete Confirmation Modal</b>.
+![Delete Modal](/docs/images/DeleteModal.png)
 
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
+## 3. <a name="considerations"></a>Considerations / Assumptions
+- API key security.  I chose to store the API key in an `.env` file for better security.  I didn't move the key to an `.env` file initially; there are a number of commits where the API key is in the repo.  There is still an additional threat to the API key security -- anything stores in `.env` file is publically available in the app's production build.  Instead of creating a backend proxy to call the API on behalf of the frontend, I just went with a `.env` file.  If you're curious to read more, check out this [link](https://create-react-app.dev/docs/adding-custom-environment-variables/#adding-development-environment-variables-in-env).
+- Required API fields.  I assumed that the API could not accept any undefined / empty string values for required fields.  Iwas able to get an update / PUT operation to work where I changed a required param, `display_name` to be an empty string, and was able to sucessfully submit the PUT request and get back a response.  Ideally, the schema would be well defined, and I would be able to have better form validation / error handling in the frontend that would ensure the user is aware of what fields are actually required.  With a stricter schema, I would provide visual cues to the user if they're missing anything.
+- Naming convention.  I typically strive to align my syntax and formatting with JavaScript standards.  But when the API named parameters with snake case, not camel case, I made the decision to have consistency over naming standards. I chose to keep my variable names as snake case as opposed to camel case to make actions such as object destructuring and request object formation easier, as well as create less opportunities for errors from having multiple naming conventions.
 
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
+## 4. <a name="future"></a>Future Development Ideas
+- Better form validation
+- Implement testing (E2E, unit)
+- Whitespace character trimming from inputs in forms
+- Table pagination
+- Export / download table capability
+- Upload CSV into table capability
+- Implement dark mode option 
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
-
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
